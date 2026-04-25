@@ -23,6 +23,38 @@ class User extends Authenticatable
         'password',
     ];
 
+// --- リレーション定義 ---
+
+    // プロフィール：1対1
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
+    // 出品商品：1対多
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
+
+    // いいね：1対多
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    // コメント：1対多
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    // 購入履歴：1対多
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
