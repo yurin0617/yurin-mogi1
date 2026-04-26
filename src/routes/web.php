@@ -18,3 +18,9 @@ use App\Http\Controllers\ItemController;
 Route::get('/', [ItemController::class, 'index']);
 // {item} とすると、Laravelは自動でIDを探してくれます
 Route::get('/item/{item}', [ItemController::class, 'show'])->where('item', '[0-9]+')->name('item.show');
+
+// 出品画面の表示
+Route::get('/sell', [ItemController::class, 'create'])->name('item.create');
+
+// 出品データの保存（POST）
+Route::post('/sell', [ItemController::class, 'store'])->name('item.store');
