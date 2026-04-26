@@ -20,8 +20,10 @@
         {{-- コントローラーから送られてきた $items をループで表示します --}}
         @foreach($items as $item)
         <div class="item">
-            <img src="{{ asset('storage/' . $item->image_path) }}" alt="{{ $item->name }}" width="100">
-            <p>{{ $item->name }}</p>
+            <a href="{{ route('item.show', $item->id) }}">
+                <img src="{{ asset('storage/' . $item->image_path) }}" alt="{{ $item->name }}" width="100">
+                <p>{{ $item->name }}</p>
+            </a>
         </div>
         @endforeach
     </div>
