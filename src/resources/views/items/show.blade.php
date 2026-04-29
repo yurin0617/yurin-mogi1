@@ -9,7 +9,7 @@
 <body>
     <h1>{{ $item->name }}</h1>
     <img src="{{ asset('storage/' . $item->image_path) }}" alt="{{ $item->name }}" width="300">
-    <p>ブランド: {{ $item->brand ?? 'ブランド情報なし' }}</p>
+    <p>ブランド名: {{ $item->brand ?? 'ブランド情報なし' }}</p>
     <p>¥{{ number_format($item->price) }}（税込）</p>
     <p>商品説明 {{ $item->description }}</p>
     <p>商品の情報</p>

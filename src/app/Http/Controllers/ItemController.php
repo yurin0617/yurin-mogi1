@@ -11,7 +11,7 @@ class ItemController extends Controller
     public function index()
     {
         // Itemモデルから全データを取得
-        $items = Item::all();
+        $items = Item::latest()->get();
         // 'index' という名前のビュー（画面）に、取得した $items を渡す
         return view('index', compact('items'));
     }
