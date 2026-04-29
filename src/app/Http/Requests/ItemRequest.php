@@ -38,7 +38,10 @@ class ItemRequest extends FormRequest
     {
         return [
             'name.required' => '商品名は必須です。',
+            'name.min' => '20文字以内で説明してください。',
             'price.required' => '価格は必須です。',
+            'price.integer' => '価格は半角数字で入力してください。',
+            'price.min' => '価格は0以上を入力してください。',
             'image.required' => '商品画像を選択してください。',
             'image.image' => '画像ファイルをアップロードしてください。',
             'description.required' => '説明は必須です。',
