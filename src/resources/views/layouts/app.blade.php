@@ -4,31 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <title>COACHTECH</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 
 <body>
-    <header>
-        <img src="{{ asset('images/logo_COACHTECH.png')}}" alt="COACHTECH">
+    <header class="header">
+        <div class="header-left">
+            <img src="{{ asset('images/logo_COACHTECH.png')}}" alt="COACHTECH">
+        </div>
 
         {{-- 検索フォーム --}}
-        <form action="/" method="GET">
-            <input type="text" name="keyword" placeholder="なにをお探しですか？">
-        </form>
-
-        <nav>
-            @if(auth()->check())
-            {{-- ログイン時の表示 --}}
-            <form action="/logout" method="POST" style="display:inline;">
-                @csrf
-                <button type="submit">ログアウト</button>
+        <div class="header-center">
+            <form action="/" method="GET" class="search-form">
+                <input type="text" name="keyword" class="search-input" placeholder="なにをお探しですか？">
             </form>
-            <a href="/mypage">マイページ</a>
-            @else
-            {{-- 未ログイン時の表示 --}}
-            <a href="/login">ログイン</a>
-            <a href="/register">会員登録</a>
-            @endif
-            <a href="/sell">出品</a>
+        </div>
+
+        <nav class="header-right">
+            <ul class="nav-list">
+                @if(auth()->check())
+                {{-- ログイン時の表示 --}}
+                <li>
+                    <form action="/logout" method="POST">
+                        @csrf
+                        <button type="submit" class="nav-button">ログアウト</button>
+                    </form>
+                </li>
+                <li><a href="/mypage" class="nav-link">マイページ</a></li>
+                @else
+                {{-- 未ログイン時の表示 --}}
+                <li><a href="/login" class="nav-link">ログイン</a></li>
+                <li><a href="/register" class="nav-link">会員登録</a></li>
+                @endif
+                <li><a href="/sell" class="nav-link sell-button">出品</a></li>
+            </ul>
         </nav>
     </header>
 
