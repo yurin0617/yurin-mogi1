@@ -11,7 +11,9 @@
 <body>
     <header class="header">
         <div class="header-left">
-            <img src="{{ asset('images/logo_COACHTECH.png')}}" alt="COACHTECH">
+            <a href="/">
+                <img src="{{ asset('images/logo_COACHTECH.png')}}" alt="COACHTECH">
+            </a>
         </div>
 
         <!-- ログイン・会員登録画面「以外」の時だけ表示する -->
@@ -37,7 +39,7 @@
                 @else
                 {{-- 未ログイン時の表示 --}}
                 <li><a href="/login" class="nav-link">ログイン</a></li>
-                <li><a href="/register" class="nav-link">会員登録</a></li>
+                <li><a href="/mypage" class="nav-link">マイページ</a></li>
                 @endif
                 <li><a href="/sell" class="nav-link sell-button">出品</a></li>
             </ul>

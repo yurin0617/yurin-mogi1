@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ItemController;
-
+use App\Http\Controllers\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,6 +21,8 @@ Route::get('/item/{item}', [ItemController::class, 'show'])->where('item', '[0-9
 
 
 Route::middleware('auth')->group(function () {
+    Route::get('/profile/setup', [ProfileController::class, 'index']);
+
     // 出品画面の表示
     Route::get('/sell', [ItemController::class, 'create'])->name('item.create');
 
