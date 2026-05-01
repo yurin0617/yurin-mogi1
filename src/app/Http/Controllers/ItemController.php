@@ -38,7 +38,7 @@ class ItemController extends Controller
 
         // 1. 画像保存（パス取得）
         $validated['image_path'] = $request->file('image')->store('images', 'public');
-        $validated['user_id'] = auth()->id() ?? 1;
+        $validated['user_id'] = auth()->id();
 
         // 2. 不要な「category_ids」を抜き出す（createでエラーにならないようにするため）
         // 配列の「値」だけ取り出し、キーを消す処理

@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>COACHTECH</title>
+    <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 
@@ -13,6 +14,8 @@
             <img src="{{ asset('images/logo_COACHTECH.png')}}" alt="COACHTECH">
         </div>
 
+        <!-- ログイン・会員登録画面「以外」の時だけ表示する -->
+        @unless(Route::is('login') || Route::is('register'))
         {{-- 検索フォーム --}}
         <div class="header-center">
             <form action="/" method="GET" class="search-form">
@@ -22,7 +25,7 @@
 
         <nav class="header-right">
             <ul class="nav-list">
-                @if(auth()->check())
+                @if (Auth::check())
                 {{-- ログイン時の表示 --}}
                 <li>
                     <form action="/logout" method="POST">
@@ -39,6 +42,7 @@
                 <li><a href="/sell" class="nav-link sell-button">出品</a></li>
             </ul>
         </nav>
+        @endunless
     </header>
 
     <main>
