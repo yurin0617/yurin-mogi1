@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProfileController;
 /*
@@ -21,11 +22,23 @@ Route::get('/item/{item}', [ItemController::class, 'show'])->where('item', '[0-9
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile/setup', [ProfileController::class, 'index']);
+    // 1. プロフィール画面（マイページ）
+    Route::get('/mypage', [ProfileController::class, 'show'])->name('mypage.show');
+
+    // 2. プロフィール編集画面（初回設定も兼ねる）
+    // 表示 (GET)
+    Route::get('/mypage/profile', [ProfileController::class, 'index'])->name('profile.setup');
+    // 更新処理 (POST)
+    Route::post('/mypage/profile', [ProfileController::class, 'update'])->name('profile.update');
 
     // 出品画面の表示
     Route::get('/sell', [ItemController::class, 'create'])->name('item.create');
 
     // 出品データの保存（POST）
     Route::post('/sell', [ItemController::class, 'store'])->name('item.store');
+
+    // 購入画面の表示
+    Route::get('/purchase/{item_id}', [PurchaseController::class, 'show'])->name('purchase.show');
+    // 購入確定処理
+    Route::post('/purchase/{item_id}', [PurchaseController::class, 'store'])->name('purchase.store');
 });

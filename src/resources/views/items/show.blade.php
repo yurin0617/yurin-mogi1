@@ -7,6 +7,15 @@
 <h1>{{ $item->name }}</h1>
 <p>{{ $item->brand ?? 'ブランド情報なし' }}</p>
 <p>¥{{ number_format($item->price) }}（税込）</p>
+
+<div class="item-action">
+    @if($item->purchase)
+    <button disabled style="background-color: gray;">売り切れました</button>
+    @else
+    <a href="{{ route('purchase.show', $item->id) }}" class="btn-purchase">購入手続きへ</a>
+    @endif
+</div>
+
 <p>商品説明 {{ $item->description }}</p>
 <p>商品の情報</p>
 <p>カテゴリー
