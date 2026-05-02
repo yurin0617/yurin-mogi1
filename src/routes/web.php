@@ -33,7 +33,6 @@ Route::middleware('auth')->group(function () {
 
     // 出品画面の表示
     Route::get('/sell', [ItemController::class, 'create'])->name('item.create');
-
     // 出品データの保存（POST）
     Route::post('/sell', [ItemController::class, 'store'])->name('item.store');
 
@@ -41,4 +40,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/purchase/{item_id}', [PurchaseController::class, 'show'])->name('purchase.show');
     // 購入確定処理
     Route::post('/purchase/{item_id}', [PurchaseController::class, 'store'])->name('purchase.store');
+
+    // 商品に対して「いいね」する
+    Route::post('/item/{item_id}/like', [ItemController::class, 'like'])->name('like.store');
+    // 「いいね」を解除する
+    Route::post('/item/{item_id}/unlike', [ItemController::class, 'unlike'])->name('like.destroy');
 });

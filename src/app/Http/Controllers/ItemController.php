@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ItemRequest;
 use App\Models\Category;
 use App\Models\Item;
+use App\Models\Like;
 
 class ItemController extends Controller
 {
@@ -52,5 +53,24 @@ class ItemController extends Controller
         $item->categories()->attach($categoryIds);
 
         return redirect('/')->with('success', '出品が完了しました！');
+    }
+
+    // いいね
+    public function like($item_id)
+    {
+        Like::create([
+            'user_id' => auth()->id(),
+            'item_id' => $item_id,
+        ]);
+
+        return back(); // 元の画面に戻る
+    }
+
+    // いいね解除
+    public function unlike($item_id)
+    {
+        Like::where('user_id', auth()->id())->where('item_id', $item_id)->delete();
+
+        return back();
     }
 }

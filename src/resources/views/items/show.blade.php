@@ -8,6 +8,29 @@
 <p>{{ $item->brand ?? 'ブランド情報なし' }}</p>
 <p>¥{{ number_format($item->price) }}（税込）</p>
 
+<div class="like-area">
+    @if($item->likes->where('user_id', auth()->id())->first())
+    {{-- いいね済み：ピンクのハートを表示 --}}
+    <form action="{{ route('like.destroy', $item->id) }}" method="POST" class="like-form">
+        @csrf
+        <button type="submit">
+            <img src="{{ asset('images/heartlogo_pink.png') }}" alt="いいね解除" class="heart-icon">
+        </button>
+    </form>
+    @else
+    {{-- 未いいね：白抜きのハートを表示 --}}
+    <form action="{{ route('like.store', $item->id) }}" method="POST" class="like-form">
+        @csrf
+        <button type="submit">
+            <img src="{{ asset('images/heartlogo_default.png') }}" alt="いいねする" class="heart-icon">
+        </button>
+    </form>
+    @endif
+
+    {{-- カウント数 --}}
+    <span>{{ $item->likes->count() }}</span>
+</div>
+
 <div class="item-action">
     @if($item->purchase)
     <button disabled style="background-color: gray;">売り切れました</button>
