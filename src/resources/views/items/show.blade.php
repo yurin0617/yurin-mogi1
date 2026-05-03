@@ -61,6 +61,16 @@
     <div class="comments-list">
         @foreach($item->comments as $comment)
         <div class="comment-item">
+            <div class="comment-avatar">
+                @if($comment->user->profile && $comment->user->profile->image_path)
+                <img src="{{ asset('storage/' . $comment->user->profile->image_path) }}"
+                    alt="プロフィール画像">
+                @else
+                {{-- 画像がない場合のデフォルト画像 --}}
+                <img src="{{ asset('images/default-avatar.png') }}"
+                    alt="デフォルト画像">
+                @endif
+            </div>
             <div class="comment-user">
                 <span>{{ $comment->user->name }}</span>
                 @if($comment->user_id === $item->user_id)
