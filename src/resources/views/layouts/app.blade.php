@@ -21,7 +21,9 @@
         {{-- 検索フォーム --}}
         <div class="header-center">
             <form action="/" method="GET" class="search-form">
-                <input type="text" name="keyword" class="search-input" placeholder="なにをお探しですか？">
+                {{-- 現在のタブ情報を隠し持って送る --}}
+                <input type="hidden" name="tab" value="{{ request('tab', 'all') }}">
+                <input type="text" name="keyword" value="{{ request('keyword') }}" class="search-input" placeholder="なにをお探しですか？">
             </form>
         </div>
 

@@ -6,17 +6,44 @@ use App\Http\Requests\ItemRequest;
 use App\Models\Category;
 use App\Models\Item;
 use App\Models\Like;
+use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // Itemモデルから全データを取得
-        $items = Item::latest()->get();
-        // 'index' という名前のビュー（画面）に、取得した $items を渡す
-        return view('index', compact('items'));
-    }
+        // --- ここがポイント：タブの初期値をログイン状態で変える ---
+        $tab = $request->query('tab');
+        if (!$tab) {
+            $tab = auth()->check() ? 'mylist' : 'all';
+        }
+        // ----------------------------------------------------
 
+        // 1. 土台（自分以外 ＆ 最新順）
+        // ※最新順（latest）は最後に get() する直前でも大丈夫ですが、ここで書いてもOKです！
+        $query = Item::where('user_id', '!=', auth()->id())->latest();
+
+        // 2. 検索
+        $keyword = $request->query('keyword');
+        if ($keyword) {
+            $query->where('name', 'LIKE', "%{$keyword}%");
+        }
+
+        // 3. タブ判定
+        if ($tab === 'mylist') {
+            if (auth()->check()) {
+                $query->whereHas('likes', function ($q) {
+                    $q->where('user_id', auth()->id());
+                });
+            } else {
+                $query->whereRaw('1 = 0');
+            }
+        }
+
+        $items = $query->get();
+
+        return view('index', compact('items', 'tab', 'keyword'));
+    }
     public function show($id)
     {
         // 指定されたIDの商品を取得。なければ自動で404エラー
@@ -65,7 +92,6 @@ class ItemController extends Controller
 
         return back(); // 元の画面に戻る
     }
-
     // いいね解除
     public function unlike($item_id)
     {

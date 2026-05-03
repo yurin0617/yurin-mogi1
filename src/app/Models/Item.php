@@ -16,7 +16,7 @@ class Item extends Model
         'やや傷や汚れあり',
         '状態が悪い'
     ];
-    
+
     protected $fillable = [
         'user_id',
         'name',
