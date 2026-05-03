@@ -8,7 +8,7 @@
 <p>{{ $item->brand ?? 'ブランド情報なし' }}</p>
 <p>¥{{ number_format($item->price) }}（税込）</p>
 
-<div class="like-area">
+<div class="icon-group">
     @if($item->likes->where('user_id', auth()->id())->first())
     {{-- いいね済み：ピンクのハートを表示 --}}
     <form action="{{ route('like.destroy', $item->id) }}" method="POST" class="like-form">
@@ -28,7 +28,13 @@
     @endif
 
     {{-- カウント数 --}}
-    <span>{{ $item->likes->count() }}</span>
+    <span class="count">{{ $item->likes->count() }}</span>
+</div>
+
+{{-- コメント数表示 --}}
+<div class="icon-group">
+    <img src="{{ asset('images/commentlogo.png') }}" alt="コメント数" class="icon">
+    <span class="count">{{ $item->comments->count() }}</span>
 </div>
 
 <div class="item-action">
@@ -49,6 +55,53 @@
 </p>
 <p>商品の状態 {{ $item->condition }}</p>
 
+<div class="comment-section">
+    <h2>コメント ({{ $item->comments->count() }})</h2>
 
-<a href="/">一覧に戻る</a>
+    <div class="comments-list">
+        @foreach($item->comments as $comment)
+        <div class="comment-item">
+            <div class="comment-user">
+                <span>{{ $comment->user->name }}</span>
+                @if($comment->user_id === $item->user_id)
+                <span class="seller-badge">出品者</span>
+                @endif
+            </div>
+            <div class="comment-comment">
+                {{ $comment->comment }}
+            </div>
+            <div class="comment-time">
+                {{ $comment->created_at->format('Y/m/d H:i') }}
+            </div>
+        </div>
+        @endforeach
+    </div>
+
+    @auth
+    {{-- ★ ここにメッセージ表示を追加！ --}}
+    @if (session('message'))
+    <div class="alert alert-success">
+        {{ session('message') }}
+    </div>
+    @endif
+
+    @error('comment')
+    <div class="alert alert-danger">
+        {{ $message }}
+    </div>
+    @enderror
+
+    <form action="{{ route('comment.store', $item->id) }}" method="POST">
+        @csrf
+        <div class="form-group">
+            <textarea name="comment" class="form-control" rows="3" placeholder="商品へのコメントを入力してください"></textarea>
+        </div>
+        <button type="submit" class="btn-comment">コメントを送信する</button>
+    </form>
+    @else
+    <p class="login-prompt"><a href="{{ route('login') }}">ログイン</a>するとコメントできます。</p>
+    @endauth
+</div>
+
+
 @endsection

@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CommentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,4 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/item/{item_id}/like', [ItemController::class, 'like'])->name('like.store');
     // 「いいね」を解除する
     Route::post('/item/{item_id}/unlike', [ItemController::class, 'unlike'])->name('like.destroy');
+
+    // ログインしている人だけがコメントできる
+    Route::post('/item/{item_id}/comment', [CommentController::class, 'store'])->name('comment.store');
 });

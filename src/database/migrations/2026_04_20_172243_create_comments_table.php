@@ -19,7 +19,7 @@ class CreateCommentsTable extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             // どの商品へのコメントか
             $table->foreignId('item_id')->constrained()->onDelete('cascade');
-            
+
             // コメント内容 (長文も考慮してtext型)
             $table->text('comment');
             $table->timestamps();
