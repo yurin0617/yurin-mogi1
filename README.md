@@ -37,8 +37,8 @@ php artisan db:seed
 srcディレクトリにあるstorageディレクトリに権限を設定
 chmod -R 777 storage
 
-しんぼりっくリンク
-
+アップロードした画像をみれるようにするためシンボリックリンクを作成
+php artisan storage:link
 ```
 ## テスト環境
 てすとDB作成

@@ -8,7 +8,6 @@
 <p>{{ $item->brand ?? 'ブランド情報なし' }}</p>
 <p>¥{{ number_format($item->price) }}（税込）</p>
 
-<div class="icon-group">
     @if($item->likes->where('user_id', auth()->id())->first())
     {{-- いいね済み：ピンクのハートを表示 --}}
     <form action="{{ route('like.destroy', $item->id) }}" method="POST" class="like-form">
@@ -32,14 +31,13 @@
 </div>
 
 {{-- コメント数表示 --}}
-<div class="icon-group">
     <img src="{{ asset('images/commentlogo.png') }}" alt="コメント数" class="icon">
     <span class="count">{{ $item->comments->count() }}</span>
 </div>
 
 <div class="item-action">
     @if($item->purchase)
-    <button disabled style="background-color: gray;">売り切れました</button>
+    <button disabled>売り切れました</button>
     @else
     <a href="{{ route('purchase.show', $item->id) }}" class="btn-purchase">購入手続きへ</a>
     @endif
@@ -101,6 +99,7 @@
     </div>
     @enderror
 
+    <label>商品へのコメント</label>
     <form action="{{ route('comment.store', $item->id) }}" method="POST">
         @csrf
         <div class="form-group">

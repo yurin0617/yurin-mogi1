@@ -24,14 +24,12 @@
             {{-- 2. ここにSOLDのロジックを追加！ --}}
             @if($item->purchase()->exists())
             <div class="sold-badge">
-                <span>SOLD</span>
+                <span>Sold</span>
             </div>
             @endif
+            <p>{{ $item->name }}</p>
+        </a>
     </div>
-
-    <p>{{ $item->name }}</p>
-    </a>
-</div>
-@endforeach
+    @endforeach
 </div>
 @endsection

@@ -46,10 +46,17 @@
                 <li><a href="/sell" class="nav-link sell-button">出品</a></li>
             </ul>
         </nav>
-        @endunless
     </header>
+    @endunless
+
 
     <main>
+        @if (session('message'))
+        <div class="flash-message">
+            {{ session('message') }}
+        </div>
+        @endif
+
         @yield('content')
     </main>
 </body>
