@@ -28,6 +28,12 @@ services:
       - ./docker/mysql/data:/var/lib/mysql
       - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
 
+  mailhog:
+        image: 'mailhog/mailhog:latest'
+        ports:
+            - '1025:1025'
+            - '8025:8025'
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     environment:
@@ -40,5 +46,4 @@ services:
     ports:
       - 8080:80
 
-      mailhog
-      
+

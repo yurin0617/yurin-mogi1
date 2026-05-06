@@ -41,10 +41,27 @@ chmod -R 777 storage
 php artisan storage:link
 ```
 ## テスト環境
-てすとDB作成
-.env.testingの作成
-.php.artisantestの実行
+```
+testDB作成
 
+PHPコンテナにログインし、.envをコピーして.env.testingというファイルを作成
+.env.testingの作成
+cp .env .env.testing
+
+ファイルの作成ができたたら、.env.testingファイルの文頭部分にあるAPP_ENVとAPP_KEYを編集
+APP_ENV=test
+APP_KEY=
+DB_DATABASE=demo_test
+DB_USERNAME=root
+DB_PASSWORD=root
+
+php.artisantestの実行
+先ほど「空」にしたAPP_KEYに新たなテスト用のアプリケーションキーを加えるために
+php artisan key:generate --env=testing　を実行
+php artisan config:clear　キャッシュの削除のため実行
+
+php artisan migrate --env=testingの実行
+```
 ## 使用技術(実行環境)
 ```
 ここにバージョンを記載
