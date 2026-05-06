@@ -25,14 +25,25 @@ class PurchaseRequest extends FormRequest
     {
         return [
             'payment_method' => 'required', // 支払い方法必須
-            'shipping_address' => 'required', // 配送先必須（隠しフィールドなどで保持）
         ];
     }
+
     public function messages()
     {
         return [
             'payment_method.required' => '支払い方法を選択してください',
-            'shipping_address.required' => '配送先を登録してください',
         ];
+    }
+
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            $user = $this->user(); // ログインユーザーを取得
+
+            // セッションに「new_address」がない 且つ プロフィールに「address」がない場合
+            if (!session()->has('new_address') && (!$user->profile || !$user->profile->address)) {
+                $validator->errors()->add('address_error', '配送先を登録してください');
+            }
+        });
     }
 }

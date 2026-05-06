@@ -49,6 +49,11 @@ class FortifyServiceProvider extends ServiceProvider
             return view('auth.login');
         });
 
+        // 💡 ここを追記：メール認証の案内画面（誘導画面）の設定
+        Fortify::verifyEmailView(function () {
+            return view('auth.verify-email');
+        });
+
         RateLimiter::for('login', function (Request $request) {
             $email = (string) $request->email;
 

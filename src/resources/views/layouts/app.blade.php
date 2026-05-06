@@ -46,8 +46,9 @@
                 <li><a href="/sell" class="nav-link sell-button">出品</a></li>
             </ul>
         </nav>
+        @endunless
     </header>
-    @endunless
+
 
 
     <main>

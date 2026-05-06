@@ -22,7 +22,8 @@ Route::get('/', [ItemController::class, 'index']);
 Route::get('/item/{item}', [ItemController::class, 'show'])->where('item', '[0-9]+')->name('item.show');
 
 
-Route::middleware('auth')->group(function () {
+// この中のルートは全て「ログイン」かつ「メール認証済み」が必要になります
+Route::middleware(['auth', 'verified'])->group(function () {
     // 1. プロフィール画面（マイページ）
     Route::get('/mypage', [ProfileController::class, 'show'])->name('mypage.show');
 
