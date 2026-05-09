@@ -10,11 +10,22 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
-    public function show()
+    public function show(Request $request)
     {
         $user = Auth::user();
-        // プロフィールデータを持ってマイページを表示
-        return view('profile.show', compact('user'));
+
+        // 表示するページ（タブ）を判定。デフォルトは 'sell' (出品)
+        $page = $request->query('page', 'sell');
+
+        if ($page === 'buy') {
+            // 購入した商品を取得（Purchaseモデルや中間テーブルがある想定）
+            $displayItems = $user->purchases()->with('item')->latest()->get()->pluck('item');
+        } else {
+            // 出品した商品を取得
+            $displayItems = $user->items()->latest()->get();
+        }
+
+        return view('profile.show', compact('user', 'displayItems', 'page'));
     }
 
     public function index()

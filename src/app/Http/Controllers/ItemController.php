@@ -27,7 +27,6 @@ class ItemController extends Controller
                 return redirect()->route('profile.setup');
             }
         }
-        // ------------------------------------
 
         // --- ② タブの初期値設定 ---
         $tab = $request->query('tab');
