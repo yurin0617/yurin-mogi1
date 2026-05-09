@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\AddressRequest;
 use App\Http\Requests\PurchaseRequest;
+use Stripe\Stripe;
+use Stripe\Checkout\Session;
 
 class PurchaseController extends Controller
 {
@@ -38,9 +40,10 @@ class PurchaseController extends Controller
         return view('purchase.index', compact('item', 'display_address'));
     }
 
-    // 購入を確定する処理（ここが一番難しいところ！）
+    // 購入を確定する処理
     public function store(PurchaseRequest $request, $item_id)
     {
+        $item = Item::findOrFail($item_id);
         // 1. 今ログインしているユーザー情報を取得
         $user = auth()->user();
 
@@ -71,7 +74,50 @@ class PurchaseController extends Controller
         // 💡 ここでお掃除！
         session()->forget('new_address');
 
+        // --- カード払い または コンビニ払いの場合にStripe処理を実行 ---
+        if ($request->payment_method === 'カード払い' || $request->payment_method === 'コンビニ払い') {
+            Stripe::setApiKey(env('STRIPE_SECRET'));
+
+            // ユーザーが選んだ支払い方法によって、Stripeに渡すリストを切り替える
+            if ($request->payment_method === 'カード払い') {
+                $methods = ['card'];
+            } else {
+                $methods = ['konbini'];
+            }
+
+            $checkout_session = Session::create([
+                // ここを ['card', 'konbini'] ではなく、上で作った変数に変える！
+                'payment_method_types' => $methods,
+
+                'line_items' => [[
+                    'price_data' => [
+                        'currency' => 'jpy',
+                        'product_data' => [
+                            'name' => $item->name,
+                        ],
+                        'unit_amount' => $item->price,
+                    ],
+                    'quantity' => 1,
+                ]],
+                // コンビニ払いの設定は、カード払いの時にあっても無視されるだけなのでそのままでOK
+                'payment_method_options' => [
+                    'konbini' => [
+                        'expires_after_days' => 3,
+                    ],
+                ],
+                'mode' => 'payment',
+                'success_url' => route('purchase.success'),
+                'cancel_url' => route('purchase.show', $item->id),
+            ]);
+
+            return redirect($checkout_session->url);
+        }
         return redirect('/?tab=all')->with('message', 'ご購入ありがとうございました');
+    }
+
+    public function success()
+    {
+        return redirect('/?tab=all')->with('message', 'お支払いが完了しました');
     }
 
     // 住所変更画面を表示

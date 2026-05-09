@@ -38,6 +38,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // 出品データの保存（POST）
     Route::post('/sell', [ItemController::class, 'store'])->name('item.store');
 
+    // 購入後の画面に表示
+    Route::get('/purchase/success', [PurchaseController::class, 'success'])->name('purchase.success');
     // 購入画面の表示
     Route::get('/purchase/{item_id}', [PurchaseController::class, 'show'])->name('purchase.show');
     // 購入確定処理
