@@ -34,11 +34,11 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::createUsersUsing(CreateNewUser::class);
         // ログインバリデーションを自作の LoginRequest に入れ替える
         $this->app->bind(FortifyLoginRequest::class, LoginRequest::class);
-        // 会員登録後のリダイレクト先を /profile/setup に変更
+        // 会員登録後のリダイレクト先を / に変更
         $this->app->instance(RegisterResponse::class, new class implements RegisterResponse {
             public function toResponse($request)
             {
-                return redirect('/mypage/profile');
+                return redirect('/');
             }
         });
         Fortify::registerView(function () {

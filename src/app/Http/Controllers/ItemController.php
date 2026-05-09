@@ -12,30 +12,48 @@ class ItemController extends Controller
 {
     public function index(Request $request)
     {
-        // --- ここがポイント：タブの初期値をログイン状態で変える ---
+        // --- ① 認証・プロフィールの交通整理 ---
+        if (auth()->check()) {
+            $user = auth()->user();
+
+            // 1. メール認証がまだなら、認証案内画面へ（Fortify標準のルート名を使用）
+            if (!$user->hasVerifiedEmail()) {
+                return redirect()->route('verification.notice');
+            }
+
+            // 2. プロフィール設定（住所）がまだなら、設定画面へ
+            // ルート名 'profile.setup' を使用
+            if (empty($user->profile->address)) {
+                return redirect()->route('profile.setup');
+            }
+        }
+        // ------------------------------------
+
+        // --- ② タブの初期値設定 ---
         $tab = $request->query('tab');
         if (!$tab) {
+            // ログイン中なら 'mylist'、未ログインなら 'all' をデフォルトにする
             $tab = auth()->check() ? 'mylist' : 'all';
         }
-        // ----------------------------------------------------
 
-        // 1. 土台（自分以外 ＆ 最新順）
-        // ※最新順（latest）は最後に get() する直前でも大丈夫ですが、ここで書いてもOKです！
+        // --- ③ 商品データの取得ロジック ---
+        // 自分以外の出品 ＆ 最新順
         $query = Item::where('user_id', '!=', auth()->id())->latest();
 
-        // 2. 検索
+        // 検索キーワードがある場合
         $keyword = $request->query('keyword');
         if ($keyword) {
             $query->where('name', 'LIKE', "%{$keyword}%");
         }
 
-        // 3. タブ判定
+        // マイリストタブの場合の絞り込み
         if ($tab === 'mylist') {
             if (auth()->check()) {
                 $query->whereHas('likes', function ($q) {
                     $q->where('user_id', auth()->id());
                 });
             } else {
+                // 未ログインなら何も表示しない
                 $query->whereRaw('1 = 0');
             }
         }
@@ -44,6 +62,7 @@ class ItemController extends Controller
 
         return view('index', compact('items', 'tab', 'keyword'));
     }
+
     public function show($id)
     {
         // 指定されたIDの商品を取得。なければ自動で404エラー
