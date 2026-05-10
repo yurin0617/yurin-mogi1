@@ -38,7 +38,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // 出品データの保存（POST）
     Route::post('/sell', [ItemController::class, 'store'])->name('item.store');
 
-    // 購入後の画面に表示
+    // 購入後画面の表示
     Route::get('/purchase/success', [PurchaseController::class, 'success'])->name('purchase.success');
     // 購入画面の表示
     Route::get('/purchase/{item_id}', [PurchaseController::class, 'show'])->name('purchase.show');
@@ -58,9 +58,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // 購入処理を実行する (POST)
     Route::post('/purchase/{item_id}', [PurchaseController::class, 'store'])->name('purchase.store');
 
-    // 2. 配送先変更（ここを追加！）
+    // 配送先変更
     // 表示：/purchase/address/1 などのURL
     Route::get('/purchase/address/{item_id}', [PurchaseController::class, 'editAddress'])->name('purchase.address.edit');
     // 更新：フォームの送信先
     Route::post('/purchase/address/{item_id}', [PurchaseController::class, 'updateAddress'])->name('purchase.address.update');
+
+    Route::get('/purchase/save-payment-session', [PurchaseController::class, 'savePaymentSession']);
     });

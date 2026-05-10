@@ -97,7 +97,7 @@ class ItemController extends Controller
         // 4. カテゴリーを紐付け
         $item->categories()->attach($categoryIds);
 
-        return redirect('/')->with('success', '出品が完了しました！');
+        return redirect('/?tab=all')->with('success', '出品が完了しました！');
     }
 
     // いいね

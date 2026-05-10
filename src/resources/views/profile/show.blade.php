@@ -8,7 +8,7 @@
             @if($user->profile && $user->profile->image_path)
             <img src="{{ asset('storage/' . $user->profile->image_path) }}" alt="ユーザーアイコン" width="100">
             @else
-            <div style="profile-icon-placeholder">No Image</div>
+            <div class="profile-icon-placeholder">No Image</div>
             @endif
         </div>
 
@@ -46,4 +46,5 @@
         <p class="empty-message">表示する商品がありません。</p>
         @endforelse
     </div>
-    @endsection
+</div>
+@endsection

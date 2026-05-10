@@ -17,5 +17,8 @@
     <label>建物名</label>
     <input type="text" name="building" value="{{ old('building', $profile->building) }}">
 
+    {{-- 住所変更フォームの中にこれを忍ばせておく --}}
+    <input type="hidden" name="payment_method" value="{{ session('payment_method') }}">
+
     <button type="submit">更新する</button>
 </form>

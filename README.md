@@ -40,6 +40,7 @@ chmod -R 777 storage
 アップロードした画像をみれるようにするためシンボリックリンクを作成
 php artisan storage:link
 ```
+
 ## テスト環境
 ```
 testDB作成
@@ -55,22 +56,31 @@ DB_USERNAME=root
 DB_PASSWORD=root
 
 先ほど「空」にしたAPP_KEYに新たなテスト用のアプリケーションキーを加えるために
-php artisan key:generate --env=testing　を実行
-php artisan config:clear　キャッシュの削除のため実行
+php artisan key:generate --env=testingを実行
+php artisan config:clearキャッシュの削除のため実行
 
-php artisan migrate --env=testingの実行
+php artisan migrate --env=testing
+php artisan db:seed --env=testingの実行
 
 テストの実行
 php  artisan test
 ```
+
 ## 使用技術(実行環境)
 ```
-ここにバージョンを記載
+PHP：8.1.34
+Laravel：8.83.8
+MySQL：8.0.26
+Ngnix：1.21.1
+MailHog：1.0.1
+phpMyAdmin：5.2.3
 ```
 
 ## URL
 ```
-ここにURLを記載
+ユーザー登録画面：http://localhost/register
+ログイン画面：http://localhost/login
+商品一覧画面：http://localhost
 ```
 
 ## ER図

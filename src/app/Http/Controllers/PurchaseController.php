@@ -37,6 +37,9 @@ class PurchaseController extends Controller
             'building'    => session('new_address.building')    ?? $user->profile->building ?? '',
         ];
 
+        // ★追加：セッションから支払い方法を取得する（なければ空）
+        $selected_payment = session('payment_method', '');
+
         return view('purchase.index', compact('item', 'display_address'));
     }
 
@@ -136,7 +139,20 @@ class PurchaseController extends Controller
         // 'new_address' という名前の箱に入れておくイメージ
         session(['new_address' => $request->only(['postal_code', 'address', 'building'])]);
 
-        // 2. 購入画面に戻る
+        // 2. 支払い方法も一緒に保存（ここが追加ポイント！）
+        if ($request->has('payment_method')) {
+            session(['payment_method' => $request->payment_method]);
+        }
+
+        // 3. 購入画面に戻る
         return redirect()->route('purchase.show', $item_id);
+    }
+    public function savePaymentSession(Request $request)
+    {
+        // 届いた値をセッションにメモするだけ！
+        session(['payment_method' => $request->payment_method]);
+
+        // 「了解！」という返事を返す（画面は切り替わりません）
+        return response()->json(['success' => true]);
     }
 }
