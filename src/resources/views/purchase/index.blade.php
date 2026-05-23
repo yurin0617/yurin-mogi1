@@ -8,26 +8,16 @@
     <p> ¥{{ number_format($item->price) }}</p>
 </div>
 
-<form action="{{ route('purchase.store', $item->id) }}" method="POST" novalidate>
+<form action="{{ route('purchase.store', $item->id) }}" method="POST" id="main-purchase-form" novalidate>
     @csrf
     <h1>支払い方法</h1>
     {{-- 支払い方法の選択 --}}
-    <select name="payment_method" id="payment-select" onchange="savePaymentMethod(this.value)">
+    <select name=" payment_method" id="payment-select">
         <option value="">選択してください</option>
         <option value="コンビニ払い" {{ session('payment_method') == 'コンビニ払い' ? 'selected' : '' }}>コンビニ払い</option>
         <option value="カード払い" {{ session('payment_method') == 'カード払い' ? 'selected' : '' }}>カード払い</option>
     </select>
 
-    <script>
-        function savePaymentMethod(value) {
-            if (!value) return;
-
-            // fetch（フェッチ）という機能を使って、裏側でこっそり通信します
-            fetch('/purchase/save-payment-session?payment_method=' + value)
-                .then(response => console.log('セッションに保存しました！'))
-                .catch(error => console.error('エラーが発生しました'));
-        }
-    </script>
     @error('payment_method')
     <div style="color: red;">{{ $message }}</div>
     @enderror

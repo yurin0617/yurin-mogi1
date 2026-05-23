@@ -53,16 +53,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // ログインしている人だけがコメントできる
     Route::post('/item/{item_id}/comment', [CommentController::class, 'store'])->name('comment.store');
 
-    // 購入画面を表示する (GET)
-    Route::get('/purchase/{item_id}', [PurchaseController::class, 'show'])->name('purchase.show');
-    // 購入処理を実行する (POST)
-    Route::post('/purchase/{item_id}', [PurchaseController::class, 'store'])->name('purchase.store');
-
     // 配送先変更
     // 表示：/purchase/address/1 などのURL
     Route::get('/purchase/address/{item_id}', [PurchaseController::class, 'editAddress'])->name('purchase.address.edit');
     // 更新：フォームの送信先
     Route::post('/purchase/address/{item_id}', [PurchaseController::class, 'updateAddress'])->name('purchase.address.update');
-
-    Route::get('/purchase/save-payment-session', [PurchaseController::class, 'savePaymentSession']);
-    });
+});

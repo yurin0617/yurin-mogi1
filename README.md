@@ -85,3 +85,11 @@ phpMyAdmin：5.2.3
 
 ## ER図
 ![ER図](ER.drawio.png)
+
+## テストユーザー
+```
+10個のダミーデータの出品者はこのユーザーです
+購入のテストをする場合は、新規ユーザー登録をしてください
+email：test@example.com
+password：password123
+```
