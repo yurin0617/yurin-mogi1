@@ -1,8 +1,11 @@
 @extends('layouts.app')
 
-@section('content')
-<h1>商品一覧ページ</h1>
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/index.css') }}">
+@endsection
 
+
+@section('content')
 {{-- タブの切り替えエリア --}}
 <div class="tabs">
     {{-- keywordも一緒に渡すことで、検索したままタブを切り替えられるようになります --}}
