@@ -1,0 +1,167 @@
+/* ==========================================
+   全体のレイアウト（左右2分割）
+   ========================================== */
+.purchase-container {
+    display: flex;              /* 💡 左と右を横並びにする */
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+    gap: 60px;                  /* 左右のブロックの間のスキマ */
+}
+
+/* 左側：商品情報や配送先（60%の幅） */
+.purchase-left {
+    flex: 60%;
+}
+
+/* 右側：確認枠とボタン（40%の幅） */
+.purchase-right {
+    flex: 40%;
+}
+
+/* 区切り線（hr）のデザイン */
+.section-divider {
+    border: none;
+    border-top: 1px solid #000000; /* うっすらとしたグレーの線 */
+    margin: 30px 0;
+}
+
+/* ==========================================
+   左側：商品基本情報（画像が左、文字が右）
+   ========================================== */
+.purchase-item-info {
+    display: flex;              /* 💡 画像とテキストを横並びにする */
+    gap: 20px;
+    align-items: center;
+}
+
+.item-image-box img {
+    width: 120px;               /* 画像のサイズ調整 */
+    height: 120px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.item-name {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #000000;             /* 真っ黒 */
+}
+
+.item-price {
+    font-size: 18px;
+    font-weight:Regular ;
+    color: #000000;             /* 真っ黒 */
+}
+
+/* ==========================================
+   左側：支払い方法 ＆ 配送先
+   ========================================== */
+.purchase-section {
+    /* 共通設定 */
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 15px;
+}
+
+/* 支払い方法の右斜め下（セレクトボックス） */
+.payment-select-box {
+    margin-left: 20px;          /* 💡 少し右にずらして「右斜め下」感を出す */
+}
+
+.payment-select-input {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc; /* もしグレーの枠線が不要なら、ここを border: none; にすると消せます */
+    border-radius: 4px;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* 配送先エリアの見出しと変更ボタンを横並びに */
+.address-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.btn-change {
+    color: #0073cc;             /* 変更リンクは青色 */
+    text-decoration: none;
+    font-size: 16px;
+}
+.btn-change:hover {
+    text-decoration: underline;
+}
+
+/* 配送先住所の右斜め下 */
+.address-content {
+    margin-left: 20px;          /* 💡 少し右にずらして「右斜め下」感を出す */
+    color: #000000;
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: Semi Bold;
+}
+
+/* ==========================================
+   右側：四角い枠（確認用）と購入ボタン
+   ========================================== */
+/* 四角い枠（カード型） */
+.purchase-summary-card {
+    border: 1px solid #000000;  /* 真っ黒な枠線 */
+    border-radius: 4px;
+    padding: 24px;
+    background-color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between; /* ラベルを左、数値を右に寄せる */
+    margin-bottom: 16px;
+    font-size: 16px;
+}
+
+.summary-item:last-child {
+    margin-bottom: 0;           /* 最後の項目の下のスキマは無し */
+}
+
+.label {
+    color: #000000;
+}
+
+.value {
+    font-weight: Regular;
+    color: #000000;
+}
+
+/* 購入するボタン（オレンジ色・白文字） */
+.btn-submit-purchase {
+    display: block;
+    width: 100%;
+    background-color: #ff5555;  /* 💡 ご希望のオレンジ色（赤みのあるオレンジ） */
+    color: #ffffff;             /* 白色 */
+    border: none;
+    padding: 14px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-submit-purchase:hover {
+    background-color: #e68a00;  /* マウスを乗せたら少し暗いオレンジ */
+}
