@@ -1,0 +1,91 @@
+/* ==========================================
+   全体を真ん中に持ってくる設定
+   ========================================== */
+.address-edit__content {
+    max-width: 600px;           /* フォームが広がりすぎない丁度いい横幅 */
+    margin: 60px auto;          /* 💡 画面の「真ん中」に寄せる設定 */
+    padding: 0 20px;
+}
+
+/* 「住所の変更」タイトルのスタイル */
+.address-title {
+    font-size: 36px;            /* 小さめの画面でもはみ出さない、バランスのいい大文字 */
+    font-weight: 700;           /* 💡 ボールド（太字） */
+    text-align: center;         /* 💡 タイトルを真ん中に */
+    color: #000000;
+    margin-bottom: 40px;
+}
+
+/* フォーム全体の縦並びの隙間調整 */
+.address-form {
+    display: flex;
+    flex-direction: column;     /* 💡 中身を上から下に順番に1列に並べる */
+    gap: 24px;                  /* 入力欄同士の縦のスキマ */
+}
+
+/* ==========================================
+   各入力欄（郵便番号、住所、建物名共通）
+   ========================================== */
+.form-group {
+    display: flex;
+    flex-direction: column;     /* 見出しの下に入力欄がくるように縦並び */
+    gap: 8px;
+}
+
+/* 見出しラベル */
+.form-label {
+    font-size: 24px;
+    font-weight: 700;           /* 💡 ご希望のボールド（太字） */
+    color: #000000;
+}
+
+/* 入力欄（inputタグ）自体のデザイン */
+.form-input {
+    width: 100%;                /* 箱に合わせて100%伸縮（画面を縮めても崩れない！） */
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #000000;
+}
+
+/* エラーメッセージ */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 2px;
+}
+
+/* ==========================================
+   更新するボタン
+   ========================================== */
+.btn-submit-address {
+    display: block;
+    width: 100%;                /* 横幅いっぱいに広げる */
+    background-color: #ff5555;  /* お気に入りのオレンジ色 */
+    color: #ffffff;             /* 白色 */
+    border: none;
+    padding: 14px;
+    font-size: 26px;
+    font-weight: 700;           /* 💡 ボタンの文字もボールド（太字） */
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.2s;
+}
+
+.btn-submit-address:hover {
+    background-color: #e64a4a;  /* マウスを乗せたら少し暗い赤オレンジ */
+}
+
+/* ==========================================
+   📱 画面が小さくなったとき（スマホ）の調整
+   ========================================== */
+@media (max-width: 768px) {
+    .address-edit__content {
+        margin: 40px auto;      /* 隙間を少しキュッと縮める */
+    }
+    .address-title {
+        font-size: 24px;        /* タイトルをスマホに合わせて一回り小さく */
+    }
+}
