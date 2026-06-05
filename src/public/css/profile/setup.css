@@ -1,0 +1,147 @@
+/* ==========================================
+   全体を真ん中に持ってくる設定
+   ========================================== */
+.profile-setup__content {
+    max-width: 600px;           /* フォームが広がりすぎない丁度いい横幅 */
+    margin: 60px auto;          /* 💡 画面の「真ん中」に寄せる設定 */
+    padding: 0 20px;
+}
+
+/* プロフィール設定（タイトル）のスタイル */
+.setup-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;           /* Bold */
+    font-size: 36px;
+    line-height: 1.0;           /* line-height: 100% */
+    letter-spacing: 0;          /* letter-spacing: 0% */
+    text-align: center;         /* 💡 タイトルを真ん中上に */
+    color: #000000;
+    margin-bottom: 40px;
+}
+
+/* フォーム全体の縦並びの隙間調整 */
+.setup-form {
+    display: flex;
+    flex-direction: column;     /* 💡 中身を上から下に順番に並べる */
+    gap: 24px;                  /* 入力欄同士の縦のスキマ */
+}
+
+/* ==========================================
+   プロフィール画像エリア（画像が左、ボタンが右）
+   ========================================== */
+.form-group-image {
+    margin-bottom: 16px;
+}
+
+/* 画像と選択ボタンを横並びにする箱 */
+.image-flex-container {
+    display: flex;              /* 💡 左に画像、右にボタンを並べる */
+    align-items: center;        /* 上下中央を綺麗に揃える */
+    gap: 30px;                  /* 画像とボタンのスキマ */
+}
+
+/* プロフィール画像（Figmaの150×150、#D9D9D9を再現） */
+.profile-image-container .profile-icon,
+.profile-icon-default {
+    width: 150px;               /* width: 150; */
+    height: 150px;              /* height: 150; */
+    border-radius: 50%;         /* 💡 マイページでお気に入りだった真ん丸に */
+    object-fit: cover;
+    background-color: #D9D9D9;  /* 💡 Figma指定の背景色 */
+}
+
+/* 画像がまだ無いときの一時的な見た目 */
+.profile-icon-default {
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+}
+
+/* 💡 本物の「ファイルを選択」の文字を消して、オシャレな赤いボタンにするプロ技 */
+.hidden-file-input {
+    display: none;              /* 元々ブラウザが持っている野暮ったいボタンを隠す */
+}
+
+.btn-select-image {
+    display: inline-block;
+    background-color: #ffffff;  /* 💡 背景は #FF5555 */
+    color: #ff5555;             /* 白文字 */
+    border: 2px solid #ff5555;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-select-image:hover {
+    background-color: #ff5555;  /* マウスを乗せたら少し暗い赤オレンジ */
+    color: #ffffff;
+}
+
+.error-message-image {
+    color: red;
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+/* ==========================================
+   各入力欄（ユーザー名、郵便番号、住所、建物名）
+   ========================================== */
+.form-group {
+    display: flex;
+    flex-direction: column;     /* 見出しの下に入力欄がくるように縦並び */
+    gap: 8px;
+}
+
+/* 見出し（ユーザー名、郵便番号など共通） */
+.form-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;           /* Bold */
+    font-size: 24px;            /* 💡 Figma指定の24px */
+    line-height: 1.0;           /* line-height: 100% */
+    color: #000000;
+}
+
+/* 入力欄（inputタグ）自体のデザイン */
+.form-input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #000000;
+}
+
+/* 各種エラーメッセージ */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 2px;
+}
+
+/* ==========================================
+   更新するボタン（ご希望のオレンジ色！）
+   ========================================== */
+.btn-submit-profile {
+    display: block;
+    width: 100%;                /* フォームの横幅いっぱいに広げる */
+    background-color: #ff5555;  /* 💡 お気に入りのオレンジ色（#FF5555と同系色） */
+    color: #ffffff;             /* 白色 */
+    border: none;
+    padding: 14px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.2s;
+}
+
+.btn-submit-profile:hover {
+    background-color: #e68a00;  /* マウスを乗せたら少し暗いオレンジ */
+}
