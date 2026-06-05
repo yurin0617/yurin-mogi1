@@ -1,12 +1,18 @@
 @extends('layouts.app')
 
+{{-- 💡 マイページ用のCSSを読み込む呪文を追加 --}}
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/profile/show.css') }}">
+@endsection
+
 @section('content')
 <div class="mypage-container">
     <div class="profile-info">
         {{-- プロフィール画像 --}}
         <div class="profile-image">
             @if($user->profile && $user->profile->image_path)
-            <img src="{{ asset('storage/' . $user->profile->image_path) }}" alt="ユーザーアイコン" width="100">
+            {{-- CSSでサイズ調整するので、width="100" は外してクラスを合わせやすくします --}}
+            <img src="{{ asset('storage/' . $user->profile->image_path) }}" alt="ユーザーアイコン">
             @else
             <div class="profile-icon-placeholder">No Image</div>
             @endif
@@ -18,8 +24,6 @@
         {{-- 編集画面へのリンク --}}
         <a href="{{ route('profile.setup') }}" class="btn">プロフィールを編集</a>
     </div>
-
-    <hr>
 
     {{-- タブ切り替えメニュー --}}
     <div class="mypage-tabs">

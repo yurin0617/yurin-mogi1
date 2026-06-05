@@ -1,0 +1,146 @@
+/* ==========================================
+   全体の調整 ＆ 区切り線
+   ========================================== */
+.mypage-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* ==========================================
+   上部：プロフィール情報（左から画像、名前、ボタン）
+   ========================================== */
+.profile-info {
+    display: flex;              /* 💡 3つの要素を横一列に並べる */
+    align-items: center;        /* 上下中央で綺麗に高さを揃える */
+    gap: 30px;                  /* 要素同士の間のスキマ */
+    margin-bottom: 20px;
+    padding-left: 60px;
+}
+
+/* プロフィール画像（ご希望の丸い形！） */
+.profile-image img, 
+.profile-icon-placeholder {
+    width: 100px;               /* 縦横同じサイズにして正方形を作る */
+    height: 100px;
+    border-radius: 50%;         /* 💡 50%にすると、正方形が綺麗な「真ん丸」になります */
+    object-fit: cover;
+}
+
+/* 画像がない場合のグレーの丸枠 */
+.profile-icon-placeholder {
+    background-color: #e0e0e0;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* ユーザー名（ご希望のボールド） */
+.profile-info h2 {
+    font-size: 36px;
+    font-weight: 700;           /* 700 = ボールド（太字） */
+    color: #000000;
+    margin: 0;
+    /* 💡 名前と編集ボタンの間を自動で広げて、ボタンを右側に寄せるプロ技 */
+    margin-right: auto; 
+}
+
+/* プロフィール編集ボタン（枠と文字がFF5555） */
+.profile-info .btn {
+    display: inline-block;
+    padding: 8px 18px;
+    font-size: 26px;
+    font-weight: 600;           /* セミボールド */
+    color: #ff5555;             /* 💡 文字色をFF5555に */
+    text-decoration: none;
+    border: 2px solid #ff5555;  /* 💡 枠線を2pxの太さでFF5555に */
+    border-radius: 4px;
+    transition: all 0.2s;
+    margin-right: 60px;
+}
+
+/* ボタンにマウスを乗せたときのオシャレな演出 */
+.profile-info .btn:hover {
+    background-color: #ff5555;  /* 背景をFF5555で塗りつぶす */
+    color: #ffffff;             /* 文字を白にする */
+}
+
+/* ==========================================
+   中段：タブメニュー（出品した・購入した）
+   ========================================== */
+.mypage-tabs {
+    display: flex;              /* タブを横並びに */
+    gap: 40px;
+    margin-bottom: 30px;
+    padding-left: 10px;
+    border-bottom: 2px solid #5f5f5f;
+}
+
+.tab-item {
+    font-size: 24px;
+    font-weight: bold;
+    color: #5f5f5f;             /* 選ばれていないときはグレー */
+    text-decoration: none;
+    padding-bottom: 12px;
+    border-bottom: 3px solid transparent; /* 下線のブレを防ぐための透明な線 */
+    margin-bottom: -2px;
+}
+
+/* 💡 選ばれているほう（activeクラスがついたとき）はオレンジ色に！ */
+.tab-item.active {
+    color: #ff0000;
+}
+
+/* ==========================================
+   下部：商品グリッド（横4つずつ並べる）
+   ========================================== */
+.mypage-item-grid {
+    display: flex;              /* 商品たちを横並びにする */
+    flex-wrap: wrap;            /* 💡 商品一覧画面で使った、4つで折り返す魔法 */
+    gap: 20px;                  /* 商品同士のスキマ */
+}
+
+/* 1つの商品カード */
+.item-card {
+    /* 100%からスキマ3個分(60px)を引いて4等分する、前にお伝えした完璧な計算式です！ */
+    width: calc((100% - 60px) / 4); 
+    margin-bottom: 20px;
+}
+
+.item-link {
+    text-decoration: none;
+    color: #000000;
+    display: block;
+}
+
+/* 商品画像 */
+.item-image-wrapper img {
+    width: 100%;                /* カードの幅いっぱいに広げる */
+    height: auto;
+    aspect-ratio: 1 / 1;        /* 💡 メルカリのように、画像を「正方形」に統一するプロ技 */
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* 商品名（画像の下） */
+.item-name {
+    margin-top: 8px;
+    font-size: 25px;
+    font-weight: 500;
+    /* 長い名前を「...」で省略する設定 */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 商品がないときのメッセージ */
+.empty-message {
+    color: #999;
+    font-size: 16px;
+    text-align: center;
+    width: 100%;
+    padding: 40px 0;
+}
