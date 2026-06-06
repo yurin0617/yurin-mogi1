@@ -1,0 +1,295 @@
+/* ==========================================
+   1. 全体のレイアウト（画面の中央寄せ）
+   ========================================== */
+.sell-container {
+    max-width: 600px;           /* フォームが横に広がりすぎないサイズ */
+    margin: 50px auto;          /* 💡 画面の中央に配置 */
+    padding: 0 20px;
+}
+
+/* メインタイトル */
+.sell-title {
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;         /* 真ん中上 */
+    color: #000000;
+    margin-bottom: 40px;
+}
+
+/* フォーム全体の縦並び構造 */
+.sell-form {
+    display: flex;
+    flex-direction: column;     /* 上から下へ1列に並べる */
+    gap: 36px;
+}
+
+/* セクションごとのまとまり */
+.section-group {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* 各入力項目のまとまり */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* 各項目の見出し */
+.form-label-main,
+.form-label {
+    font-size: 16px;
+    font-weight: 700;
+    color: #000000;
+}
+
+/* ==========================================
+   2. セクションごとの見出し＆お気に入りの下線
+   ========================================== */
+.section-heading {
+    font-size: 20px;
+    font-weight: 700;
+    color: #5F5F5F;             /* 💡 指定の色 */
+    padding-bottom: 8px;
+    border-bottom: 1px solid #5F5F5F; /* 💡 下に見出しと同じ色の線を引く */
+    margin: 10px 0 5px 0;
+}
+
+/* ==========================================
+   3. 商品画像アップロード（Figmaの大きな四角枠）
+   ========================================== */
+.image-upload-wrapper {
+    width: 100%;
+    max-width: 680px;           /* width: 680px */
+    height: 186px;              /* height: 186px */
+    border: 2px dashed #cccccc; /* 点線の枠 */
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    
+    /* 中のボタンを上下左右のど真ん中に配置 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.hidden-file-input {
+    display: none;              /* 元のファイル選択ボタンは隠す */
+}
+
+/* 「画像を選択する」ボタン */
+.btn-select-image {
+    display: inline-block;
+    background-color: #ffffff;
+    color: #ff5655;
+    border: 2px solid #ff5555;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.btn-select-image:hover {
+    background-color: #ff5655;
+    color: #ffffff;
+}
+
+/* ==========================================
+   4. カテゴリー：長丸のボタン並び
+   ========================================== */
+.category-tags-container {
+    display: flex;
+    flex-wrap: wrap;            /* 画面端で自動的に折り返す */
+    gap: 12px;
+    padding: 5px 0;
+}
+
+.hidden-checkbox {
+    display: none;              /* 四角いチェックボックスは隠す */
+}
+
+/* 長丸タグのベース */
+.category-tag {
+    cursor: pointer;
+}
+
+.category-tag .tag-text {
+    display: inline-block;
+    padding: 8px 18px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ff5655;
+    background-color: #ffffff;
+    border: 1px solid #ff5655;
+    border-radius: 20px;        /* 💡 これで綺麗な長丸（カプセル型）になります */
+    transition: all 0.2s;
+    user-select: none;
+}
+
+/* チェックが入った瞬間にオレンジに変わる設定 */
+.hidden-checkbox:checked + .tag-text {
+    background-color: #ff5555;
+    color: #ffffff;
+    border-color: #ff5555;
+    font-weight: 700;
+}
+
+/* ==========================================
+   5. Figma完全再現：カスタムプルダウン（商品の状態）
+   ========================================== */
+.custom-select-container {
+    position: relative;
+    width: 100%;
+}
+
+/* プルダウンの見た目の枠（閉じているとき） */
+.custom-select-trigger {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 1.5px solid #B1B1B1; /* 指定のグレー枠 */
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: #000000;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+}
+
+.custom-arrow {
+    font-size: 12px;
+    color: #B1B1B1;
+}
+
+/* 💡 飛び出る選択肢リストの箱 */
+.custom-options-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #636769;  /* 💡 基本のバックカラー：#636769 */
+    border: 1.5px solid #B1B1B1;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    z-index: 100;
+    display: none;              /* 初期状態は非表示 */
+    max-height: 250px;
+    overflow-y: auto;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* JSでメニューが開いた時 */
+.custom-options-list.open {
+    display: block;
+}
+
+/* 💡 各選択肢の通常状態 */
+.custom-option {
+    padding: 12px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #EAEAEA;  /* 💡 選択できる文字のバックカラー：#EAEAEA */
+    color: #000000;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #cccccc;
+    transition: background-color 0.1s;
+}
+
+.custom-option:last-child {
+    border-bottom: none;
+}
+
+.custom-option:hover {
+    background-color: #dddddd;
+}
+
+/* 💡 チェックマーク（初期状態は非表示） */
+.checkmark {
+    margin-right: 10px;
+    font-weight: bold;
+    visibility: hidden;
+    color: #5599EB;             /* チェックマークの色：#5599EB */
+}
+
+/* 💡 選択中（選ばれてアクティブになった時）のスタイル */
+.custom-option.selected {
+    background-color: #5599EB !important; /* 💡 選択されたら背景色が #5599EB に！ */
+    color: #ffffff;
+}
+
+/* 選択中になったら先頭の✓を表示する魔法 */
+.custom-option.selected .checkmark {
+    visibility: visible;
+    color: #ffffff;
+}
+
+/* ==========================================
+   6. その他の入力欄 ＆ ボタン ＆ エラー
+   ========================================== */
+.form-input,
+.form-textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1.5px solid #B1B1B1; /* 統一感を持たせるためグレー枠に設定 */
+    border-radius: 4px;
+    color: #000000;
+    font-family: inherit;
+}
+
+/* 販売価格（¥マークの配置） */
+.price-input-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.price-currency {
+    position: absolute;
+    left: 15px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #333333;
+}
+
+.price-input {
+    padding-left: 35px;
+}
+
+/* 出品するボタン */
+.btn-submit-sell {
+    display: block;
+    width: 100%;
+    background-color: #ff5655;
+    color: #ffffff;
+    border: none;
+    padding: 14px;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.2s;
+}
+
+.btn-submit-sell:hover {
+    background-color: #e64a4a;
+}
+
+/* エラーメッセージ */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 2px;
+}
