@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Models\User; // 最後の「正しい情報」のテストでユーザーを作るために必要です
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class T02_LoginTest extends TestCase
