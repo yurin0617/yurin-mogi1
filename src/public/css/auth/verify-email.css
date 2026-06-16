@@ -1,0 +1,36 @@
+/* public/css/auth.css */
+.auth-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.btn-verify {
+    display: inline-block;
+    background: #D9D9D9;
+    border: 1px solid #000000;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #000;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.btn-resend {
+    /* ご指定のスタイル */
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-style: normal; /* CSSではBoldはweightで指定します */
+    font-size: 24px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    
+    /* ボタン特有の装飾 */
+    background: none;
+    border: none;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+    display: block;
+    margin: 10px auto;
+}
