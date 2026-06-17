@@ -17,7 +17,7 @@ class CreateCategoryItemTable extends Migration
             $table->id();
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->foreignId('item_id')->constrained()->onDelete('cascade');
-            // 【重要】ここが複合ユニークキーの設定です
+            // 【重要】複合ユニークキーの設定
             $table->unique(['category_id', 'item_id']);
             $table->timestamps();
         });

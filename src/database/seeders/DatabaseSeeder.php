@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-      // ここで作成したシーダーを呼び出す
+        // ここで作成したシーダーを呼び出す
         $this->call([
             UserSeeder::class,      // 先にユーザーを作って...
             CategorySeeder::class,

@@ -16,7 +16,7 @@ class ItemSeeder extends Seeder
      */
     public function run(): void
     {
-       $user = User::first(); 
+        $user = User::first();
 
         $items = [
             ['name' => '腕時計', 'price' => 15000, 'brand' => 'Rolax', 'description' => 'スタイリッシュなデザインのメンズ腕時計', 'image_path' => 'sample/Armani+Mens+Clock.jpg', 'condition' => '良好', 'categories' => ['ファッション', 'メンズ', 'アクセサリー']],
@@ -34,7 +34,7 @@ class ItemSeeder extends Seeder
         foreach ($items as $itemData) {
             $categoryNames = $itemData['categories'];
             unset($itemData['categories']);
-            
+
             $itemData['user_id'] = $user->id;
 
             $item = Item::create($itemData);

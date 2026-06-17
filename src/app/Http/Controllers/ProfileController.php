@@ -18,7 +18,7 @@ class ProfileController extends Controller
         $page = $request->query('page', 'sell');
 
         if ($page === 'buy') {
-            // 購入した商品を取得（Purchaseモデルや中間テーブルがある想定）
+            // 購入した商品を取得
             $displayItems = $user->purchases()->with('item')->latest()->get()->pluck('item');
         } else {
             // 出品した商品を取得
@@ -60,7 +60,7 @@ class ProfileController extends Controller
                 'postal_code' => $request->postal_code,
                 'address' => $request->address,
                 'building' => $request->building,
-                'image_path' => $imagePath, // DBに保存されるパス
+                'image_path' => $imagePath,
             ]
         );
 

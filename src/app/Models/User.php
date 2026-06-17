@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;// 💡 1. これを追加 メール認証
+use Illuminate\Contracts\Auth\MustVerifyEmail; // メール認証
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable implements MustVerifyEmail // 💡 2. implementsを追加 メール認証
+class User extends Authenticatable implements MustVerifyEmail // メール認証
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -23,7 +23,7 @@ class User extends Authenticatable implements MustVerifyEmail // 💡 2. impleme
         'password',
     ];
 
-// --- リレーション定義 ---
+    // --- リレーション定義 ---
 
     // プロフィール：1対1
     public function profile()
